@@ -1,0 +1,41 @@
+@page "/enrollment"
+@inject GlobalPhoneState PhoneState
+
+<PageTitle>Flujo de nómina</PageTitle>
+
+<h1 class="h4 mb-3">Reinicio y autorización de nómina</h1>
+
+<div class="card shadow-sm border-0 mb-3">
+    <div class="card-body">
+        <h2 class="h6">Reiniciar flujo de enrolamiento</h2>
+        <div class="btn-group" role="group">
+            <button class="btn btn-outline-primary" disabled="@(!PhoneState.HasPhoneNumber)" @onclick='() => Reset("N2")'>Reiniciar N2</button>
+            <button class="btn btn-outline-primary" disabled="@(!PhoneState.HasPhoneNumber)" @onclick='() => Reset("N4")'>Reiniciar N4</button>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <h2 class="h6">Autorizar obtención de nómina</h2>
+        <div class="btn-group" role="group">
+            <button class="btn btn-outline-success" disabled="@(!PhoneState.HasPhoneNumber)" @onclick='() => Authorize("N2")'>Autorizar N2</button>
+            <button class="btn btn-outline-success" disabled="@(!PhoneState.HasPhoneNumber)" @onclick='() => Authorize("N4")'>Autorizar N4</button>
+        </div>
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(_message))
+{
+    <div class="alert alert-success mt-3 mb-0">@_message</div>
+}
+
+@code {
+    private string _message = string.Empty;
+
+    private void Reset(string level)
+        => _message = $"Flujo {level} reiniciado para {PhoneState.PhoneNumber}.";
+
+    private void Authorize(string level)
+        => _message = $"Nómina {level} autorizada para {PhoneState.PhoneNumber}.";
+}

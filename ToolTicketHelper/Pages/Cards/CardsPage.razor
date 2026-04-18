@@ -1,0 +1,60 @@
+@page "/cards"
+@inject GlobalPhoneState PhoneState
+
+<PageTitle>Tarjetas</PageTitle>
+
+<h1 class="h4 mb-3">Administración de tarjetas</h1>
+
+<div class="row g-3">
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h2 class="h6">Agregar tarjeta</h2>
+                <div class="mb-2">
+                    <label class="form-label">Últimos 4 dígitos</label>
+                    <input class="form-control" maxlength="4" @bind="_lastFour" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Alias</label>
+                    <input class="form-control" @bind="_alias" />
+                </div>
+                <button class="btn btn-success" disabled="@(!PhoneState.HasPhoneNumber)" @onclick="AddCard">Agregar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h2 class="h6">Eliminar tarjeta</h2>
+                <div class="mb-2">
+                    <label class="form-label">ID de tarjeta</label>
+                    <input class="form-control" @bind="_cardId" />
+                </div>
+                <button class="btn btn-outline-danger" disabled="@(!PhoneState.HasPhoneNumber)" @onclick="RemoveCard">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(_message))
+{
+    <div class="alert alert-info mt-3">@_message</div>
+}
+
+@code {
+    private string _lastFour = string.Empty;
+    private string _alias = string.Empty;
+    private string _cardId = string.Empty;
+    private string _message = string.Empty;
+
+    private void AddCard()
+    {
+        _message = $"Tarjeta ****{_lastFour} ({_alias}) agregada a {PhoneState.PhoneNumber}.";
+    }
+
+    private void RemoveCard()
+    {
+        _message = $"Tarjeta {_cardId} eliminada de {PhoneState.PhoneNumber}.";
+    }
+}

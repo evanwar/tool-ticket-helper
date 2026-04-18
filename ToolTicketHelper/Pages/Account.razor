@@ -1,0 +1,89 @@
+@page "/account"
+@inject GlobalPhoneState PhoneState
+
+<PageTitle>Cuenta</PageTitle>
+
+<h1 class="h4 mb-3">Operaciones de cuenta</h1>
+
+<div class="row g-3">
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h2 class="h6">Ver información del usuario</h2>
+                <button class="btn btn-outline-primary" disabled="@(!PhoneState.HasPhoneNumber)" @onclick="LoadUser">Consultar</button>
+
+                @if (_userLoaded)
+                {
+                    <ul class="list-group list-group-flush mt-3">
+                        <li class="list-group-item d-flex justify-content-between"><span>Nombre</span><strong>Usuario Demo</strong></li>
+                        <li class="list-group-item d-flex justify-content-between"><span>Estatus</span><strong>Activo</strong></li>
+                        <li class="list-group-item d-flex justify-content-between"><span>Saldo</span><strong>$1,250.40</strong></li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h2 class="h6">Agregar fondos</h2>
+                <div class="input-group mb-2">
+                    <span class="input-group-text">$</span>
+                    <input class="form-control" type="number" min="1" step="0.01" @bind="_amount" />
+                    <button class="btn btn-success" disabled="@(!PhoneState.HasPhoneNumber)" @onclick="AddFunds">Aplicar</button>
+                </div>
+                @if (!string.IsNullOrWhiteSpace(_amountMessage))
+                {
+                    <p class="mb-0 small text-success">@_amountMessage</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h2 class="h6">Desbloquear cuenta</h2>
+                <button class="btn btn-warning" disabled="@(!PhoneState.HasPhoneNumber)" @onclick="Unlock">Desbloquear</button>
+                @if (_unlocked)
+                {
+                    <p class="mb-0 mt-2 text-success small">Cuenta desbloqueada correctamente.</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h2 class="h6">Eliminar cuenta</h2>
+                <p class="text-muted small">Elimina toda la información de la cuenta asociada al teléfono.</p>
+                <button class="btn btn-danger" disabled="@(!PhoneState.HasPhoneNumber)" @onclick="DeleteAccount">Eliminar cuenta</button>
+                @if (_deleted)
+                {
+                    <p class="mb-0 mt-2 text-success small">Cuenta eliminada (modo plantilla).</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool _userLoaded;
+    private decimal _amount = 100;
+    private string _amountMessage = string.Empty;
+    private bool _unlocked;
+    private bool _deleted;
+
+    private void LoadUser() => _userLoaded = true;
+
+    private void AddFunds()
+    {
+        _amountMessage = $"Se agregaron {_amount:C} al teléfono {PhoneState.PhoneNumber}.";
+    }
+
+    private void Unlock() => _unlocked = true;
+
+    private void DeleteAccount() => _deleted = true;
+}
