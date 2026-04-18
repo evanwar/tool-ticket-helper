@@ -1,0 +1,62 @@
+@implements IDisposable
+@inject ToolTicketHelper.Services.GlobalPhoneState PhoneState
+
+<div class="w-100">
+    <label class="form-label mb-1 fw-semibold text-muted small">Número telefónico global</label>
+    <div class="input-group">
+        <span class="input-group-text">+52</span>
+        <input class="form-control"
+               value="@_localPhone"
+               @oninput="OnPhoneChanged"
+               placeholder="10 dígitos"
+               maxlength="10"
+               inputmode="numeric" />
+        <button class="btn btn-outline-secondary" type="button" @onclick="ClearPhone">Limpiar</button>
+    </div>
+    <div class="form-text">
+        @if (PhoneState.HasPhoneNumber)
+        {
+            <span class="text-success">Teléfono activo: @PhoneState.PhoneNumber</span>
+        }
+        else
+        {
+            <span class="text-warning">Ingresa un teléfono válido para habilitar acciones.</span>
+        }
+    </div>
+</div>
+
+@code {
+    private string _localPhone = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        _localPhone = PhoneState.PhoneNumber;
+        PhoneState.Changed += HandlePhoneChanged;
+    }
+
+    private void OnPhoneChanged(ChangeEventArgs args)
+    {
+        var value = args.Value?.ToString() ?? string.Empty;
+        var sanitized = new string(value.Where(char.IsDigit).Take(10).ToArray());
+
+        _localPhone = sanitized;
+        PhoneState.SetPhoneNumber(sanitized);
+    }
+
+    private void ClearPhone()
+    {
+        _localPhone = string.Empty;
+        PhoneState.Clear();
+    }
+
+    private void HandlePhoneChanged()
+    {
+        _localPhone = PhoneState.PhoneNumber;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        PhoneState.Changed -= HandlePhoneChanged;
+    }
+}
