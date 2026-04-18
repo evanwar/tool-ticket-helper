@@ -1,0 +1,11 @@
+C:\Users\evana\source\repos\ToolTicketHelper\ToolTicketHelper.Domain\bin\Debug\net10.0\ToolTicketHelper.Domain.deps.json
+C:\Users\evana\source\repos\ToolTicketHelper\ToolTicketHelper.Domain\bin\Debug\net10.0\ToolTicketHelper.Domain.dll
+C:\Users\evana\source\repos\ToolTicketHelper\ToolTicketHelper.Domain\bin\Debug\net10.0\ToolTicketHelper.Domain.pdb
+C:\Users\evana\source\repos\ToolTicketHelper\ToolTicketHelper.Domain\obj\Debug\net10.0\ToolTicketHelper.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\evana\source\repos\ToolTicketHelper\ToolTicketHelper.Domain\obj\Debug\net10.0\ToolTicketHelper.Domain.AssemblyInfoInputs.cache
+C:\Users\evana\source\repos\ToolTicketHelper\ToolTicketHelper.Domain\obj\Debug\net10.0\ToolTicketHelper.Domain.AssemblyInfo.cs
+C:\Users\evana\source\repos\ToolTicketHelper\ToolTicketHelper.Domain\obj\Debug\net10.0\ToolTicketHelper.Domain.csproj.CoreCompileInputs.cache
+C:\Users\evana\source\repos\ToolTicketHelper\ToolTicketHelper.Domain\obj\Debug\net10.0\ToolTicketHelper.Domain.dll
+C:\Users\evana\source\repos\ToolTicketHelper\ToolTicketHelper.Domain\obj\Debug\net10.0\refint\ToolTicketHelper.Domain.dll
+C:\Users\evana\source\repos\ToolTicketHelper\ToolTicketHelper.Domain\obj\Debug\net10.0\ToolTicketHelper.Domain.pdb
+C:\Users\evana\source\repos\ToolTicketHelper\ToolTicketHelper.Domain\obj\Debug\net10.0\ref\ToolTicketHelper.Domain.dll

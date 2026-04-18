@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ToolTicketHelper.Application/ToolTicketHelper.Application.csproj" />
+  <Project Path="ToolTicketHelper.Domain/ToolTicketHelper.Domain.csproj" />
+  <Project Path="ToolTicketHelper.Infraestructure/ToolTicketHelper.Infraestructure.csproj" />
+  <Project Path="ToolTicketHelper/ToolTicketHelper.csproj" />
+</Solution>
